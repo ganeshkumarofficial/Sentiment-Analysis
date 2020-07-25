@@ -1,0 +1,35 @@
+https://colab.research.google.com/drive/1gqqxBfkAWJhZ0Q9vFca3z0KqoF50kZeH?usp=sharing
+
+pip install newspaper3k
+
+from textblob import TextBlob
+import nltk
+from newspaper import Article
+
+#Get the article
+url='https://everythingcomputerscience.com/'
+article = Article(url)
+
+#Using NLP
+article.download() #Getting HTML content
+article.parse() #Parse the article
+nltk.download('punkt')
+article.nlp() # Keyword Extraction
+
+#Getting Summary of article
+text = article.summary
+print(text)
+
+# Create TextBlob Object
+obj = TextBlob(text)
+
+#This returns values -1,0,1
+sentiment=obj.sentiment.polarity
+print(sentiment)
+
+if sentiment == 0:
+  print('Neutral')
+elif sentiment > 0:
+  print('Positive')
+else:
+  print('Negative')
